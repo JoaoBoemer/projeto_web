@@ -22,6 +22,12 @@ use Illuminate\Support\Facades\DB;
 </div>
 @endif
 
+@if(session()->has('produto_atualizado'))
+<div class='alert alert-success'>
+    <p>{{ session()->get('produto_atualizado')}}
+</div>
+@endif
+
 <body>
     <H3 style="text-align: center;">ITEM</H3>
     <br>
@@ -31,7 +37,7 @@ use Illuminate\Support\Facades\DB;
                 Cadastro de item
             </div>
         </div>
-        <form action="{{route('produto')}}" method="post" class="login" style="padding:0px">
+        <form action="{{route('produto_cadastrar')}}" method="post" class="login" style="padding:0px">
             @csrf
             <div class="row" style="width: 80%; margin: auto; border: black solid 1px;">
                 <div class="input-group mb-3" style="margin: 10px auto;">
@@ -60,12 +66,12 @@ use Illuminate\Support\Facades\DB;
             </div>
         </form>
     </div>
-
-    <table class="table" style="width:90%; text-align:center; margin: auto;">
+    <h2>Itens Cadastrados</h2>
+    <table class="table" style="width:75%; text-align:center; margin: auto;">
         <thead>
             <tr>
                 <th> ID</th>
-                <th> NOME </th>
+                <!-- <th> NOME </th> -->
                 <th> APELIDO </th>
                 <th> REFERENCIA </th>
                 <th> PESO BRUTO </th>
@@ -81,14 +87,14 @@ use Illuminate\Support\Facades\DB;
             ?>
             <tr>
                 <td> {{$produto->id}} </td>
-                <td> {{$produto->produto_nome}} </td>
+                <!-- <td> {{$produto->produto_nome}} </td> -->
                 <td> {{$produto->produto_apelido}} </td>
                 <td> {{$produto->produto_referencia}} </td>
                 <td> {{$produto->produto_peso_bruto}} </td>
                 <td> {{$produto->produto_peso_liquido}} </td>
                 <td> <?php $un_medida = un_medida::select('medida_apelido')->where(['id' => $produto->un_medida_id])->get();
                 print($un_medida[0]->medida_apelido);?> </td>
-                <td> <a href="produto/{{$produto->id}}/edit" class="btn btn-primary">Edit</a> </td>
+                <td> <a href="produto/{{$produto->id}}" class="btn btn-primary">Editar</a> </td>
             </tr>
             @endforeach
         </tbody>

@@ -32,9 +32,12 @@ Route::get('/produto', function(){
     return view('dashboard/produto', compact('produtos'));
 })->name('produto');
 
-Route::post('/produto', function(){
-    return view('dashboard/produto');
-})->name('produto_cadastrado');
+Route::post('/produto/cadastrar', [App\Http\Controllers\ProdutoController::class, 'cadastrar'])->name('produto_cadastrar');
+
+Route::get('/produto/{produto_id}', [App\Http\Controllers\ProdutoController:: class, 'edit']);
+Route::put('/produto/{produto_id}', [App\Http\Controllers\ProdutoController:: class, 'update'])->name('editar_produto');
+Route::get('/produto/excluir/{produto_id}', [App\Http\Controllers\ProdutoController:: class, 'excluir']);
+Route::delete('/produto/excluir/{produto_id}', [App\Http\Controllers\ProdutoController::class, 'destroy'])->name('excluir_produto');
 
 Route::get('/compra', function(){
     return view('dashboard/compra');
@@ -45,7 +48,8 @@ Route::get('/venda', function(){
 })->name('venda');
 
 Route::get('/estoque', function(){
-    return view('dashboard/estoque');
+    $produtos = App\Models\Produto::all();
+    return view('dashboard/estoque', compact('produtos'));
 })->name('estoque');
 
 Route::get('/imposto', function(){
@@ -54,5 +58,4 @@ Route::get('/imposto', function(){
 
 
 Route::post('', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
-Route::post('/register', [App\Http\Controllers\RegisterController:: class, 'register'])->name('register');
-Route::post('/produto', [\App\Http\Controllers\ProdutoController::class, 'produto'])->name('produto');
+Route::post('/register/submit', [App\Http\Controllers\RegisterController:: class, 'register'])->name('register/submit');

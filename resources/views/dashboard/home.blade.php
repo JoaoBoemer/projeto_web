@@ -25,6 +25,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 </head>
+
 <body>
 
     <div class="welcome">
@@ -48,6 +49,16 @@
                 <p style="text-align:center">{{ session()->get('usuario_nao_encontrado')}}
             </div>
             @endif
+            @if(session()->has('email_existente'))
+            <div class='alert alert-danger'>
+                <p style="text-align:center">{{ session()->get('email_existente')}}
+            </div>
+            @endif
+            @if(session()->has('usuario_existente'))
+            <div class='alert alert-danger'>
+                <p style="text-align:center">{{ session()->get('usuario_existente')}}
+            </div>
+            @endif
             <form action="{{route('login')}}" method="post" class="login">
                 @csrf
                 <label for="usuario">Usuario</label>
@@ -60,7 +71,7 @@
                     <a href="">Esqueceu a senha?</a>
                 </div>
                 <input class="botao" type="submit" name="submit" value="login">
-                <br><br>
+                <br>
                 <button class="botao" onclick="window.location.href='/register'"><a style="text-decoration: none; color:black" href="\register">Registrar</a></button>
             </form>
         </div>

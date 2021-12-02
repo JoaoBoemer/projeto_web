@@ -14,13 +14,20 @@ class RegisterController extends Controller
             'usuario' => 'required',
             'senha' => 'required'
         ]);
-        
-        $component = User::select('*')->where(['email' => $request->email])->get();
-        if($component[0]->email == $request->email){
-            session()->flash('email_existente', 'O email ja está cadastrado');
-            return redirect()->route('register');
+        $email = User::select('email')->where(['email' => $request->email])->first();
+        $user = User::select('name')->where(['name' => $request->usuario])->first();
+        if($user <> null){
+            if ($user->name == $request->usuario) {
+                session()->flash('usuario_existente', 'O usuario ja esta cadastrado');
+                return redirect()->route('home');
+            }
         }
-
+        if($email <> null){
+            if ($email->email == $request->email) {
+                session()->flash('email_existente', 'O email ja está cadastrado');
+                return redirect()->route('home');
+            }
+        }
         User::insert([
             'email' => $request->email,
             'name' => $request->usuario,

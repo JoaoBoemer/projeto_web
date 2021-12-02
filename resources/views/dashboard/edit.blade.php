@@ -5,6 +5,7 @@
 @section('content')
 
 <?php
+
 use APP\Models\Produto;
 use App\Models\un_medida;
 use Illuminate\Support\Facades\DB;
@@ -31,15 +32,16 @@ use Illuminate\Support\Facades\DB;
                 Edicao de item
             </div>
         </div>
-        <form action="{{route('editar_produto')}}" method="post" class="login" style="padding:0px">
+        <form action="{{route('editar_produto', $produto)}}" method="post" class="login" style="padding:0px">
+            @method('PUT')
             @csrf
             <div class="row" style="width: 80%; margin: auto; border: black solid 1px;">
                 <div class="input-group mb-3" style="margin: 10px auto;">
-                    <input class="form-control" placeholder="Nome" type="text" name="nome" id="nome" required="true" maxlength="60">
-                    <input class="form-control" placeholder="Apelido" type="text" name="apelido" id="apelido" required="true" maxlength="60">
+                    <input class="form-control" placeholder="Nome" value="{{ old('nome') ?? $produto->produto_nome }}" type="text" name="nome" id="nome" required="true" maxlength="60">
+                    <input class="form-control" placeholder="Apelido" value ="{{ old('apelido') ?? $produto->produto_apelido }}" type="text" name="apelido" id="apelido" required="true" maxlength="60">
                 </div>
                 <div class="input-group mb-3">
-                    <input class="form-control" placeholder="Codigo de Referencia" type="text" name="referencia" id="referencia" required="true" maxlength="60">
+                    <input class="form-control" placeholder="Codigo de Referencia" value="{{ old('referencia') ?? $produto->produto_referencia }}" type="text" name="referencia" id="referencia" required="true" maxlength="60">
                     <select class="form-select form-select" aria-label=".form-select-lg example" name="un_medida" id="un_medida" required="true">
                         <option selected value="1">Unitario</option>
                         <option value="2">Quilograma</option>
@@ -48,51 +50,19 @@ use Illuminate\Support\Facades\DB;
                     </select>
                 </div>
                 <div class="input-group mb-3">
-                    <input class="form-control" placeholder="Peso bruto (Kg)" type="number" name="peso_bruto" id="peso_bruto" required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
-                    <input class="form-control" placeholder="Peso liquido (Kg)" type="number" name="peso_liquido" id="peso_liquido" required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
+                    <input class="form-control" placeholder="Peso bruto (Kg)" value="{{ old('peso_bruto') ?? $produto->produto_peso_bruto }}" type="number" name="peso_bruto" id="peso_bruto" required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
+                    <input class="form-control" placeholder="Peso liquido (Kg)" value="{{ old('peso_liquido') ?? $produto->produto_peso_liquido }}" type="number" name="peso_liquido" id="peso_liquido" required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
                 </div>
                 <div class="input-group mb-3">
-                    <input class="form-control" placeholder="Observacoes" type="text" name="observacoes" id="observacao" required="true" maxlength="60">
+                    <input class="form-control" placeholder="Observacoes" value="{{ old('observacoes') ?? $produto->produto_observacoes }}" type="text" name="observacoes" id="observacoes" required="true" maxlength="60">
                 </div>
                 <div style="margin: auto; text-align: right;" class="mb-2">
                     <input class="btn btn-primary" type="submit" name="submit" value="Gravar">
+                    <td> <a href="/produto/excluir/{{$produto->id}}" class="btn btn-primary">Excluir</a> </td>
                 </div>
             </div>
         </form>
     </div>
-
-    <table class="table" style="width:90%; text-align:center; margin: auto;">
-        <thead>
-            <tr>
-                <th> ID</th>
-                <th> NOME </th>
-                <th> APELIDO </th>
-                <th> REFERENCIA </th>
-                <th> PESO BRUTO </th>
-                <th> PESO LIQUIDO </th>
-                <th> UNIDADE </th>
-                <th> EDITAR </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($produtos as $produto)
-            <?php 
-            $teste = Produto::join('un_medida', 'un_medida_id', DB::RAW($produto->un_medida_id))->get();
-            ?>
-            <tr>
-                <td> {{$produto->id}} </td>
-                <td> {{$produto->produto_nome}} </td>
-                <td> {{$produto->produto_apelido}} </td>
-                <td> {{$produto->produto_referencia}} </td>
-                <td> {{$produto->produto_peso_bruto}} </td>
-                <td> {{$produto->produto_peso_liquido}} </td>
-                <td> <?php $un_medida = un_medida::select('medida_apelido')->where(['id' => $produto->un_medida_id])->get();
-                print($un_medida[0]->medida_apelido);?> </td>
-                <td> <a href="/main/produto/{{$produto->id}}/edit" class="btn btn-primary">Edit</a> </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
 </body>
 
 @endsection

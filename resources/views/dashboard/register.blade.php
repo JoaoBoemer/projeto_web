@@ -33,13 +33,8 @@
             <h2 style="text-align: center;">
                 <br>CADASTRAR
             </h2>
-            <form action="{{route('register')}}" method="post" class="login">
+            <form action="{{route('register/submit')}}" method="post" class="login">
                 @csrf
-                @if(session()->has('email_existente'))
-                <div class='alert alert-danger'>
-                    <p style="text-align:center">{{ session()->get('email_existente')}}
-                </div>
-                @endif
                 <label for="email">Email</label>
                 <input type="text" name="email" id="email" required="true" maxlength="60">
                 <br><br>
