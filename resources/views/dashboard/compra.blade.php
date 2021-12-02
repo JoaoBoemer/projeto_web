@@ -14,6 +14,11 @@
     <p>{{ session()->get('compra_excluida')}}
 </div>
 @endif
+@if(session()->has('sem_produto'))
+<div class='alert alert-danger'>
+    <p>{{ session()->get('sem_produto')}}
+</div>
+@endif
     <H3 style="text-align: center;">COMPRA</H3>
     <br>
     <div class="container" style="z-index:0">
@@ -26,7 +31,7 @@
             @csrf
             <div class="row" style="width: 80%; margin: auto; border: black solid 1px;">
                 <div class="mb-3" style="margin: 10px auto;">
-                    <select class="form-control" name="produto">
+                    <select class="form-control" name="produto" required="true">
                         @foreach($produto_array AS $produto)
                         <option value="{{ $produto->id }}" name="produto">{{ $produto->produto_nome }}</option>
                         @endforeach

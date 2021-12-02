@@ -16,7 +16,7 @@
             @csrf
             <div class="row" style="width: 80%; margin: auto; border: black solid 1px;">
                 <div class="mb-3" style="margin: 10px auto;">
-                    <select class="form-control" name="produto">
+                    <select class="form-control" name="produto" required="true">
                         @foreach($estoque_array AS $estoque)
                         @if($estoque->quantidade > 0)
                         <option value="{{ $estoque->id }}" name="produto">Produto: {{ $estoque->produto_id}} | Quantidade:{{ $estoque->estoque_quantidade }} | Valor: R${{ $estoque->estoque_valor }}</option>

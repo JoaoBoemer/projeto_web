@@ -17,6 +17,12 @@ class CompraController extends Controller
         $data = $request->data;
         $forma_pagamento = $request->forma_pagamento;
         
+        if($produto_id == null){
+            session()->flash('sem_produto', 'Produto inválido');
+            return redirect()->route('compra');
+        }
+        
+
         $estoque_id = db::table('estoque')->insertGetId([
             'produto_id' => $produto_id,
             'estoque_valor' => $valor,

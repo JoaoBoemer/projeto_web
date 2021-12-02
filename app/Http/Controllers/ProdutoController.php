@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Estoque;
 use Illuminate\Http\Request;
 use App\Models\produto;
+use Illuminate\Support\Facades\DB;
 
 class ProdutoController extends Controller
 {
