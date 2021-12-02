@@ -39,7 +39,7 @@ Route::get('/produto/excluir/{produto_id}', [App\Http\Controllers\ProdutoControl
 Route::delete('/produto/excluir/{produto_id}', [App\Http\Controllers\ProdutoController::class, 'destroy'])->name('excluir_produto');
 Route::post('/compra/cadastrar', [\App\Http\Controllers\CompraController::class, 'comprar'])->name('compra_cadastrar');
 Route::get('/compra/{compra_id}', [App\Http\Controllers\CompraController:: class, 'excluir'])->name('compra_excuir');
-Route::post('/venda/cadastrar', [App\Http\Controllers\VendaController:: class, 'vender'])->name('venda_cadastrar');
+Route::post('/venda/{estoque_id}', [App\Http\Controllers\VendaController:: class, 'vender'])->name('venda_cadastrar');
 
 Route::get('/compra', function(){
     $produto_array = App\Models\Produto::all();

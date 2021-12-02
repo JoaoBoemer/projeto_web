@@ -54,8 +54,8 @@ use Illuminate\Support\Facades\DB;
                     </select>
                 </div>
                 <div class="input-group mb-3">
-                    <input class="form-control" placeholder="Peso bruto (Kg)" type="number" step='0.01' name="peso_bruto" id="peso_bruto" required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
-                    <input class="form-control" placeholder="Peso liquido (Kg)" type="number" step='0.01' name="peso_liquido" id="peso_liquido" required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
+                    <input class="form-control" placeholder="Peso bruto (Kg)" min="0.01" type="number" step='0.01' name="peso_bruto" id="peso_bruto" required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
+                    <input class="form-control" placeholder="Peso liquido (Kg)" min="0.01" type="number" step='0.01' name="peso_liquido" id="peso_liquido" required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
                 </div>
                 <div class="input-group mb-3">
                     <input class="form-control" placeholder="Observacoes" type="text" name="observacoes" id="observacao" required="true" maxlength="60">

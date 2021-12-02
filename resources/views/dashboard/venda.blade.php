@@ -3,7 +3,6 @@
 @section('title', 'Main')
 
 @section('content')
-
 <body>
 <H3 style="text-align: center;">VENDA</H3>
     <br>
@@ -19,7 +18,9 @@
                 <div class="mb-3" style="margin: 10px auto;">
                     <select class="form-control" name="produto">
                         @foreach($estoque_array AS $estoque)
+                        @if($estoque->quantidade > 0)
                         <option value="{{ $estoque->id }}" name="produto">Produto: {{ $estoque->produto_id}} | Quantidade:{{ $estoque->estoque_quantidade }} | Valor: R${{ $estoque->estoque_valor }}</option>
+                        @endif
                         @endforeach
                     </select>
                 </div>

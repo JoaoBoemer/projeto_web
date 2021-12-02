@@ -33,8 +33,8 @@
                     </select>
                 </div>
                 <div class="input-group mb-3">
-                    <input class="form-control" placeholder="Quantidade" type="number" name="quantidade" step='0.01' required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
-                    <input class="form-control" placeholder="Valor" type="number" name="valor" step='0.01' required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
+                    <input class="form-control" placeholder="Quantidade" min="0.01" type="number" name="quantidade" step='0.01' required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
+                    <input class="form-control" placeholder="Valor" min="0.01" type="number" name="valor" step='0.01' required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
                 </div>
                 <div class="mb-3">
                     <input class="form-control" placeholder="Cliente" type="text" name="cliente" required="true">
