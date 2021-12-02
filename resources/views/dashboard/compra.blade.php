@@ -9,8 +9,11 @@
     <p>{{ session()->get('Sucesso')}}
 </div>
 @endif
-
-<body>
+@if(session()->has('compra_excluida'))
+<div class='alert alert-success'>
+    <p>{{ session()->get('compra_excluida')}}
+</div>
+@endif
     <H3 style="text-align: center;">COMPRA</H3>
     <br>
     <div class="container" style="z-index:0">
@@ -48,6 +51,9 @@
             </div>
         </form>
     </div>
+    <h2>
+        COMPRAS CADASTRADAS
+    </h2>
     <table class="table" style="width:75%; text-align:center; margin: auto;">
         <thead>
             <tr>
@@ -73,7 +79,5 @@
             </tr>
             @endforeach
         </tbody>
-    </table>
-</body>
 
 @endsection
