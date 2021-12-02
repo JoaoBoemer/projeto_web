@@ -33,14 +33,16 @@ Route::get('/produto', function(){
 })->name('produto');
 
 Route::post('/produto/cadastrar', [App\Http\Controllers\ProdutoController::class, 'cadastrar'])->name('produto_cadastrar');
-
 Route::get('/produto/{produto_id}', [App\Http\Controllers\ProdutoController:: class, 'edit']);
 Route::put('/produto/{produto_id}', [App\Http\Controllers\ProdutoController:: class, 'update'])->name('editar_produto');
 Route::get('/produto/excluir/{produto_id}', [App\Http\Controllers\ProdutoController:: class, 'excluir']);
 Route::delete('/produto/excluir/{produto_id}', [App\Http\Controllers\ProdutoController::class, 'destroy'])->name('excluir_produto');
+Route::post('/compra/cadastrar', [\App\Http\Controllers\CompraController::class, 'comprar'])->name('compra_cadastrar');
 
 Route::get('/compra', function(){
-    return view('dashboard/compra');
+    $produto_array = App\Models\Produto::all();
+    $compras = App\Models\compra::all();
+    return view('dashboard/compra', compact('produto_array'), compact('compras'));
 })->name('compra');
 
 Route::get('/venda', function(){

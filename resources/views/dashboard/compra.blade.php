@@ -4,45 +4,76 @@
 
 @section('content')
 
+@if(session()->has('Sucesso'))
+<div class='alert alert-success'>
+    <p>{{ session()->get('Sucesso')}}
+</div>
+@endif
+
 <body>
-<H3 style="text-align: center;">COMPRA</H3>
+    <H3 style="text-align: center;">COMPRA</H3>
     <br>
     <div class="container" style="z-index:0">
         <div class="row" style="width: 80%; text-align: center; margin: auto;">
-          <div class="col" style="text-align: center; border: black solid 2px; background-color: lightblue;">
-            Compra de item
-          </div>
-        </div>
-        <div class="row" style="width: 80%; margin: auto; border: black solid 1px;">
-            <div class="mb-3" style="margin: 10px auto;">
-                <select class="form-select form-select" placeholder="A">
-                    <option value="1">PRODUTO</option>
-                  </select>
+            <div class="col" style="text-align: center; border: black solid 2px; background-color: lightblue;">
+                Compra de item
             </div>
-            <div class="input-group mb-3">
-                <input type="number" class="form-control" onkeyup="if(this.value<0){this.value= this.value * -1}" placeholder="Codigo de referencia" aria-label="Codigo">
-                <select class="form-select form-select">
-                    <option selected>UN</option>
-                    <option value="1">KG</option>
-                    <option value="2">CAIXA</option>
-                    <option value="3">OUTRO</option>
-                  </select>
+        </div>
+        <form action="{{route('compra_cadastrar')}}" method="post" class="login" style="padding:0px">
+            @csrf
+            <div class="row" style="width: 80%; margin: auto; border: black solid 1px;">
+                <div class="mb-3" style="margin: 10px auto;">
+                    <select class="form-control" name="produto">
+                        @foreach($produto_array AS $produto)
+                        <option value="{{ $produto->id }}" name="produto">{{ $produto->produto_nome }}</option>
+                        @endforeach
+                    </select>
                 </div>
-            <div class= "mb-3">
-                <input type="text" class="form-control" placeholder="Cliente" aria-label="Cliente">
+                <div class="input-group mb-3">
+                    <input class="form-control" placeholder="Quantidade" type="number" name="quantidade" step='0.01' required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
+                    <input class="form-control" placeholder="Valor" type="number" name="valor" step='0.01' required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
+                </div>
+                <div class="mb-3">
+                    <input class="form-control" placeholder="Cliente" type="text" name="cliente" required="true">
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" placeholder="Data" type="date" name="data" required="true">
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" placeholder="Forma de pagamento" type="text" name="forma_pagamento" required="true">
+                </div>
+                <div style="margin: auto; text-align: right;" class="mb-2">
+                    <input class="btn btn-primary" type="submit" name="submit" value="Gravar">
+                </div>
             </div>
-            <div class="input-group mb-3">
-                <input type="number" class="form-control" onkeyup="if(this.value<0){this.value= this.value * -1}" placeholder="Peso unitario (Kg) " aria-label="Peso">
-                <input type="number" class="form-control" onkeyup="if(this.value<0){this.value= this.value * -1}" placeholder="Valor (R$)" aria-label="Valor">
-            </div>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Observacoes" aria-label="Observacoes">
-            </div>
-            <div style="margin: auto; text-align: right;" class="mb-2">
-                <button type="button" class="btn btn-primary">Gravar</button>
-            </div>
-        </div>
+        </form>
     </div>
+    <table class="table" style="width:75%; text-align:center; margin: auto;">
+        <thead>
+            <tr>
+                <th> ID</th>
+                <th> NOME DO PRODUTO </th>
+                <th> QUANTIDADE </th>
+                <th> VALOR </th>
+                <th> DATA </th>
+                <th> FORMA DE PAGAMENTO </th>
+                <th> EXCLUIR </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($compras as $compra)
+            <tr>
+                <td> {{$compra->id}} </td>
+                <td> {{$compra->id}} </td>
+                <td> {{$compra->compra_quantidade}} </td>
+                <td> R${{$compra->compra_valor}} </td>
+                <td> {{$compra->compra_data}} </td>
+                <td> {{$compra->compra_forma_pagamento}} </td>
+                <td> <a href="compra/{{$compra->id}}" class="btn btn-primary">Excluir</a> </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </body>
 
 @endsection
