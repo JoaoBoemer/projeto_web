@@ -20,7 +20,7 @@ class VendaController extends Controller
         dump($estoque_id, $quantidade, $valor, $cliente, $data, $forma_pagamento);
 
         $estoque = estoque::find($estoque_id);
-        
+
         dump($estoque);
 
         return "AntesDoInsert";
