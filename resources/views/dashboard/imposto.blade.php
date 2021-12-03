@@ -5,18 +5,22 @@
 @section('content')
 
 <body>
-<div class="body_text">
-        Aqui explicaremos um pouco dos calculos realizados.<br>
-        No lucro presumido, o nível de detalhamento das declarações é menor que o lucro real mas ainda sim é necessário um pouco do esforço do contribuinte.<br>
-        Nele, é adotado o regime cumulativo, aonde as alíquotas de PIS/COFINS são menores, sendo elas de 3,00 % e 0,65%. Contúdo, nesse regime, não são gerados créditos de impostos na venda de produtos, apenas é deduzido na compra. No lucro real é tributado com os valores do PIS/COFINS de 7,6% e 1,65% na compra, contudo o mesmo é recebido de crédito na venda, assim, compensando parte dos gastos.
+    <div class="body_text">
+        <p>&#160Aqui explicaremos um pouco dos calculos realizados.</p>
+        <p>&#160No lucro presumido, o nível de detalhamento das declarações é menor que o lucro real mas ainda sim é necessário um pouco do esforço do contribuinte.</p>
+        <p>&#160Nele, é adotado o regime cumulativo, aonde as alíquotas de PIS/COFINS são menores, sendo elas de 3,00 % e 0,65%. Contúdo, nesse regime, a cobrança será referente ao faturamento da empresa, ou seja, independente dos lucros, se a empresa acabou lucrando pouco em um mês, se houve um bom faturamento, os impostos serão altos também.</p>
+        <p>&#160Já no lucro real, o PIS/COFINS tem alíquotas maiores de 1,65% e 7,6%, contúdo, há algumas deduções de impostos, e outros impostos como o IRPJ (Imposto de renda de Pessoa Jurídica) e o CSLL são debitados apenas dos lucros da empresa.</p>
+        <p>&#160Nesse sistema, realizaremos as cobranças por TRIMESTRE, mas, você pode inserir os dias desejados para a cobrança caso queira ter uma noção do valor que será pago em um determinado período.</p>
     </div>
-    <div class="date_title">
-        <div class="date_content">
-            &#160 Escolha a data:
-            <input type="date" id="data" name="data" style="border: none;">
+    <form action="{{route('calcular_imposto')}}" method="post">
+        @csrf
+        <div class="date_title" style="width: 50%; text-align:center">
+            <input type="date" name="data_inicio" style="border: none;" required="true">
+            <input type="date" name="data_fim" style="border: none;" required="true">
+            <input class="button" type="submit" name="submit" value="Executar">
         </div>
-    </div>
-    <div class="input-group mb-3" style="width: 800px; margin: auto;">
+    </form>
+    <div class="input-group mb-3">
         <div class="sub_title2">
             &#160LUCRO REAL (TOTAL): R$0,00
         </div>
@@ -24,7 +28,7 @@
             &#160Lucro presumido: R$0,00
         </div>
     </div>
-    <div class="input-group mb-3" style="width: 800px; margin: auto;">
+    <div class="input-group mb-3">
         <div class="sub_title2">
             &#160Debitos (pago): R$0,00
         </div>
@@ -32,12 +36,14 @@
             &#160Debitos (pago): R$0,00
         </div>
     </div>
-    <div style="width: 735px; margin: auto;">
-        <div style="width: 350px; border: black 1px solid;">
+    <div class="input-group mb-3">
+        <div class="sub_title2">
+            &#160Credito (recebido): R$0,00
+        </div>
+        <div class="sub_title2">
             &#160Credito (recebido): R$0,00
         </div>
     </div>
-    
 </body>
 
 @endsection

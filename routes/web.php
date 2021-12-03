@@ -41,6 +41,7 @@ Route::post('/compra/cadastrar', [\App\Http\Controllers\CompraController::class,
 Route::get('/compra/{compra_id}', [App\Http\Controllers\CompraController:: class, 'excluir'])->name('compra_excuir');
 Route::post('/venda/submit', [App\Http\Controllers\VendaController:: class, 'vender'])->name('venda_cadastrar');
 Route::get('/venda/{venda_id}', [App\Http\Controllers\VendaController::class, 'excluir'])->name('venda_excluir');
+Route::post('/imposto/calcular', [App\Http\Controllers\ImpostoController:: class, 'calcular'])->name('calcular_imposto');
 
 Route::get('/compra', function(){
     $produto_array = App\Models\Produto::all();
