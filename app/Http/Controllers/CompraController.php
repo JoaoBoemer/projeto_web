@@ -21,14 +21,23 @@ class CompraController extends Controller
             session()->flash('sem_produto', 'Produto inválido');
             return redirect()->route('compra');
         }
-        
 
-        $estoque_id = db::table('estoque')->insertGetId([
-            'produto_id' => $produto_id,
-            'estoque_valor' => $valor,
-            'estoque_quantidade' => $quantidade,
-            'estoque_data_entrada' => $data
-        ]);
+        $estoque = Estoque::select('*')->where([
+            'produto_id' => $produto_id
+            ])->first();
+
+        if(isset($estoque)){
+            $estoque_id = $estoque->id;
+            $estoque->estoque_quantidade += $quantidade;
+            $estoque->save();
+        } else {
+            $estoque_id = db::table('estoque')->insertGetId([
+                'produto_id' => $produto_id,
+                'estoque_valor' => $valor,
+                'estoque_quantidade' => $quantidade,
+                'estoque_data_entrada' => $data
+            ]);
+        }
 
         compra::insert([
             'produto_id' => $produto_id,
@@ -48,11 +57,17 @@ class CompraController extends Controller
         $compra = compra::find($id);
         $estoque_id = $compra->estoque_id;
         $estoque = estoque::find($estoque_id);
-        $compra->delete();
-        $estoque->delete();
-        
-        session()->flash('compra_excluida', 'Compra excluida com sucesso.');
-        return redirect()->route('compra');
-
+        if($compra->compra_quantidade == $estoque->estoque_quantidade){
+            $compra->delete();
+            $estoque->delete();
+            session()->flash('compra_excluida', 'Compra excluida com sucesso.');
+            return redirect()->route('compra');
+        } else {
+            $estoque->estoque_quantidade -= $compra->compra_quantidade;
+            $estoque->save();
+            $compra->delete();
+            session()->flash('compra_excluida', 'Compra excluida com sucesso.');
+            return redirect()->route('compra');
+        }
     }
 }

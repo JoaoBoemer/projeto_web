@@ -54,7 +54,8 @@ Route::get('/venda', function(){
 
 Route::get('/estoque', function(){
     $produtos = App\Models\Produto::all();
-    return view('dashboard/estoque', compact('produtos'));
+    $estoque_array = App\Models\Estoque::all();
+    return view('dashboard/estoque', compact('produtos'), compact('estoque_array'));
 })->name('estoque');
 
 Route::get('/imposto', function(){

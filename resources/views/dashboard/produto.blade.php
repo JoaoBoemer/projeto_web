@@ -71,7 +71,6 @@ use Illuminate\Support\Facades\DB;
         <thead>
             <tr>
                 <th> ID</th>
-                <!-- <th> NOME </th> -->
                 <th> APELIDO </th>
                 <th> REFERENCIA </th>
                 <th> PESO BRUTO </th>
@@ -92,8 +91,8 @@ use Illuminate\Support\Facades\DB;
                 <td> {{$produto->produto_referencia}} </td>
                 <td> {{$produto->produto_peso_bruto}} </td>
                 <td> {{$produto->produto_peso_liquido}} </td>
-                <td> <?php $un_medida = un_medida::select('medida_apelido')->where(['id' => $produto->un_medida_id])->get();
-                print($un_medida[0]->medida_apelido);?> </td>
+                <td> <?php $un_medida = un_medida::select('medida_apelido')->where(['id' => $produto->un_medida_id])->first();
+                print($un_medida->medida_apelido);?> </td>
                 <td> <a href="produto/{{$produto->id}}" class="btn btn-primary">Editar</a> </td>
             </tr>
             @endforeach

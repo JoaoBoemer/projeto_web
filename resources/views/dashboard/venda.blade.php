@@ -18,8 +18,8 @@
                 <div class="mb-3" style="margin: 10px auto;">
                     <select class="form-control" name="produto" required="true">
                         @foreach($estoque_array AS $estoque)
-                        @if($estoque->quantidade > 0)
-                        <option value="{{ $estoque->id }}" name="produto">Produto: {{ $estoque->produto_id}} | Quantidade:{{ $estoque->estoque_quantidade }} | Valor: R${{ $estoque->estoque_valor }}</option>
+                        @if($estoque->estoque_quantidade > 0)
+                        <option value="{{ $estoque->id }}" name="produto">Produto ID: {{ $estoque->produto_id}} | Quantidade:{{ $estoque->estoque_quantidade }} | Valor: R${{ $estoque->estoque_valor }}</option>
                         @endif
                         @endforeach
                     </select>

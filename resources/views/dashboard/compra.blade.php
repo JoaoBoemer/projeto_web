@@ -4,6 +4,9 @@
 
 @section('content')
 
+<?php use app\Models\Produto;
+?>
+
 @if(session()->has('Sucesso'))
 <div class='alert alert-success'>
     <p>{{ session()->get('Sucesso')}}
@@ -57,6 +60,7 @@
         </form>
     </div>
     <h2>
+        <BR>
         COMPRAS CADASTRADAS
     </h2>
     <table class="table" style="width:75%; text-align:center; margin: auto;">
@@ -64,6 +68,7 @@
             <tr>
                 <th> ID</th>
                 <th> NOME DO PRODUTO </th>
+                <th> CLIENTE </th>
                 <th> QUANTIDADE </th>
                 <th> VALOR </th>
                 <th> DATA </th>
@@ -75,7 +80,9 @@
             @foreach($compras as $compra)
             <tr>
                 <td> {{$compra->id}} </td>
-                <td> {{$compra->id}} </td>
+                <td> <?php $produto = produto::select('produto_nome')->where(['id' => $compra->produto_id])->first();
+                print($produto->produto_nome); ?> </td>
+                <td> {{$compra->compra_cliente}} </td>
                 <td> {{$compra->compra_quantidade}} </td>
                 <td> R${{$compra->compra_valor}} </td>
                 <td> {{$compra->compra_data}} </td>
