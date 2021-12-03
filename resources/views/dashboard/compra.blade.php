@@ -25,14 +25,14 @@
     <H3 style="text-align: center;">COMPRA</H3>
     <br>
     <div class="container" style="z-index:0">
-        <div class="row" style="width: 80%; text-align: center; margin: auto;">
+        <div class="row"">
             <div class="col" style="text-align: center; border: black solid 2px; background-color: lightblue;">
                 Compra de item
             </div>
         </div>
         <form action="{{route('compra_cadastrar')}}" method="post" class="login" style="padding:0px">
             @csrf
-            <div class="row" style="width: 80%; margin: auto; border: black solid 1px;">
+            <div class="row" style="border: black solid 1px;">
                 <div class="mb-3" style="margin: 10px auto;">
                     <select class="form-control" name="produto" required="true">
                         @foreach($produto_array AS $produto)
@@ -41,7 +41,7 @@
                     </select>
                 </div>
                 <div class="input-group mb-3">
-                    <input class="form-control" placeholder="Quantidade" type="number" name="quantidade" step='0.01' required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
+                    <input class="form-control" placeholder="Quantidade" min="0.01" type="number" name="quantidade" step='0.01' required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
                     <input class="form-control" placeholder="Valor" min="0.01" type="number" name="valor" step='0.01' required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
                 </div>
                 <div class="mb-3">
@@ -63,7 +63,7 @@
         <BR>
         COMPRAS CADASTRADAS
     </h2>
-    <table class="table" style="width:75%; text-align:center; margin: auto;">
+    <table class="table" style="text-align:center; width:90%; margin:auto">
         <thead>
             <tr>
                 <th> ID</th>

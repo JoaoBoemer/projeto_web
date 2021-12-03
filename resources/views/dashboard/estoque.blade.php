@@ -5,16 +5,13 @@
 @section('content')
 
 <?php
-
 use APP\Models\Produto;
 use App\Models\un_medida;
-use App\Models\Estoque;
-use Illuminate\Support\Facades\DB;
 ?>
 
 <body>
     <main class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" style="margin:0px">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 style="margin:auto">Estoque</h1>
         </div>
         <table class="table">
@@ -30,19 +27,21 @@ use Illuminate\Support\Facades\DB;
                 </thead>
                 <tbody>
                     @foreach($estoque_array as $estoque)
+                    @if($estoque->estoque_quantidade > 0)
                     <tr>
                         <td> {{$estoque->id}} </td>
                         <td> {{$estoque->produto_id}} </td>
                         <td> <?php $produto = produto::select('produto_nome')->where(['id' => $estoque->produto_id])->first();
                                 print($produto->produto_nome); ?> </td>
                         <td> {{$estoque->estoque_quantidade}} </td>
-                        <td> {{$estoque->estoque_valor}} </td>
+                        <td> R${{$estoque->estoque_valor}} </td>
                         <td> {{$estoque->estoque_data_entrada}} </td>
                     </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
-        <br><h3>Itens Cadastrados</h3>
+        <br><h3>Itens Cadastrados</h3><br>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -54,7 +53,7 @@ use Illuminate\Support\Facades\DB;
                         <th> PESO BRUTO </th>
                         <th> PESO LIQUIDO </th>
                         <th> UNIDADE </th>
-                        <th> Observação </th>
+                        <th> OBSERVACOES </th>
                         <th> EDITAR </th>
                     </tr>
                 </thead>
@@ -69,7 +68,7 @@ use Illuminate\Support\Facades\DB;
                         <td> {{$produto->produto_peso_liquido}} </td>
                         <td> <?php $un_medida = un_medida::select('medida_apelido')->where(['id' => $produto->un_medida_id])->first();
                                 print($un_medida->medida_apelido); ?> </td>
-                        <td> {{$produto->produto_obsercacoes}} </td>
+                        <td> {{$produto->produto_observacoes}} </td>
                         <td> <a href="produto/{{$produto->id}}" class="btn btn-primary">Editar</a> </td>
                     </tr>
                     @endforeach
@@ -77,7 +76,7 @@ use Illuminate\Support\Facades\DB;
             </table>
         </div>
     </main>
-    <script src="/assets/js/main.js"></script>
+    <!-- <script src="/assets/js/main.js"></script> -->
 </body>
 
 @endsection

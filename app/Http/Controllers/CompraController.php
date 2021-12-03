@@ -23,13 +23,14 @@ class CompraController extends Controller
         }
 
         $estoque = Estoque::select('*')->where([
-            'produto_id' => $produto_id,
-            'estoque_valor' => $valor
+            'produto_id' => $produto_id
+            //,'estoque_valor' => $valor
             ])->first();
 
         if(isset($estoque)){
             $estoque_id = $estoque->id;
             $estoque->estoque_quantidade += $quantidade;
+            $estoque->estoque_data_entrada = $data;
             $estoque->save();
         } else {
             $estoque_id = db::table('estoque')->insertGetId([

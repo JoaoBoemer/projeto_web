@@ -11,6 +11,16 @@
     <p>{{ session()->get('saldo_insuficiente')}}
 </div>
 @endif
+@if(session()->has('venda_excluida'))
+<div class='alert alert-success'>
+    <p>{{ session()->get('venda_excluida')}}
+</div>
+@endif
+@if(session()->has('data_venda'))
+<div class='alert alert-danger'>
+    <p>{{ session()->get('data_venda')}}
+</div>
+@endif
 @if(session()->has('success'))
 <div class='alert alert-success'>
     <p>{{ session()->get('success')}}
@@ -21,14 +31,14 @@
     <H3 style="text-align: center;">VENDA</H3>
     <br>
     <div class="container" style="z-index:0">
-        <div class="row" style="width: 80%; text-align: center; margin: auto;">
+        <div class="row">
             <div class="col" style="text-align: center; border: black solid 2px; background-color: lightblue;">
                 Venda de item
             </div>
         </div>
         <form action="{{route('venda_cadastrar')}}" method="post" class="login" style="padding:0px">
             @csrf
-            <div class="row" style="width: 80%; margin: auto; border: black solid 1px;">
+            <div class="row" style="border: black solid 1px;">
                 <div class="mb-3" style="margin: 10px auto;">
                     <select class="form-control" name="produto" required="true">
                         @foreach($estoque_array AS $estoque)

@@ -50,8 +50,8 @@ use Illuminate\Support\Facades\DB;
                     </select>
                 </div>
                 <div class="input-group mb-3">
-                    <input class="form-control" placeholder="Peso bruto (Kg)" min="0.01" value="{{ old('peso_bruto') ?? $produto->produto_peso_bruto }}" type="number" name="peso_bruto" id="peso_bruto" required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
-                    <input class="form-control" placeholder="Peso liquido (Kg)" min="0.01" value="{{ old('peso_liquido') ?? $produto->produto_peso_liquido }}" type="number" name="peso_liquido" id="peso_liquido" required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
+                    <input class="form-control" placeholder="Peso bruto (Kg)" min="0.01" step='0.01' value="{{ old('peso_bruto') ?? $produto->produto_peso_bruto }}" type="number" name="peso_bruto" id="peso_bruto" required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
+                    <input class="form-control" placeholder="Peso liquido (Kg)" min="0.01" step='0.01' value="{{ old('peso_liquido') ?? $produto->produto_peso_liquido }}" type="number" name="peso_liquido" id="peso_liquido" required="true" onkeyup="if(this.value<0){this.value=this.value*-1}">
                 </div>
                 <div class="input-group mb-3">
                     <input class="form-control" placeholder="Observacoes" value="{{ old('observacoes') ?? $produto->produto_observacoes }}" type="text" name="observacoes" id="observacoes" required="true" maxlength="60">

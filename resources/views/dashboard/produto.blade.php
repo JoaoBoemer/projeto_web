@@ -32,14 +32,14 @@ use Illuminate\Support\Facades\DB;
     <H3 style="text-align: center;">ITEM</H3>
     <br>
     <div class="container" style="z-index:0">
-        <div class="row" style="width: 80%; text-align: center; margin: auto;">
+        <div class="row">
             <div class="col" style="text-align: center; border: black solid 2px; background-color: lightblue;">
                 Cadastro de item
             </div>
         </div>
         <form action="{{route('produto_cadastrar')}}" method="post" class="login" style="padding:0px">
             @csrf
-            <div class="row" style="width: 80%; margin: auto; border: black solid 1px;">
+            <div class="row" style="border: black solid 1px;">
                 <div class="input-group mb-3" style="margin: 10px auto;">
                     <input class="form-control" placeholder="Nome" type="text" name="nome" id="nome" required="true" maxlength="60">
                     <input class="form-control" placeholder="Apelido" type="text" name="apelido" id="apelido" required="true" maxlength="60">
