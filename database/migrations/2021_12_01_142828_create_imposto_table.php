@@ -16,6 +16,12 @@ class CreateImpostoTable extends Migration
         Schema::create('imposto', function (Blueprint $table) {
             $table->id();
             $table->date("imposto_data");
+            $table->float('impostos_real',8,2);
+            $table->float('impostos_presumido',8,2);
+            $table->float('lucro_bruto', 8, 2);
+            $table->float('faturamento_bruto', 8, 2);
+            $table->float('lucro_liquido_real',8,2);
+            $table->float('lucro_liquido_presumido',8,2);
             $table->timestamps();
         });
     }

@@ -4,6 +4,12 @@
 
 @section('content')
 
+@if(session()->has('fail'))
+<div class='alert alert-danger'>
+    <p>{{ session()->get('fail')}}
+</div>
+@endif
+
 <body>
     <div class="body_text">
         <p>&#160Aqui explicaremos um pouco dos calculos realizados.</p>
@@ -22,27 +28,41 @@
     </form>
     <div class="input-group mb-3">
         <div class="sub_title2">
-            &#160Lucro liquido (Lucro real):
+            &#160Faturamento Bruto:
             @if(isset($imposto))
-            R${{$imposto->lucro_liquido}}
+            R${{$imposto->faturamento_bruto}}
             @endif
         </div>
         <div class="sub_title2">
-            &#160Faturamento (Lucro presumido):
+            &#160Lucro Bruto:
             @if(isset($imposto))
-            R${{$imposto->faturamento_liquido}}
+            R${{$imposto->lucro_bruto}}
             @endif
         </div>
     </div>
     <div class="input-group mb-3">
         <div class="sub_title2">
-            &#160Impostos (real):
+            &#160Lucro liquido (Real):
+            @if(isset($imposto))
+            R${{$imposto->lucro_liquido_real}}
+            @endif
+        </div>
+        <div class="sub_title2">
+            &#160Lucro liquido (Presumido):
+            @if(isset($imposto))
+            R${{$imposto->lucro_liquido_presumido}}
+            @endif
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <div class="sub_title2">
+            &#160Impostos (Real):
             @if(isset($imposto))
             R${{$imposto->impostos_real}}
             @endif
         </div>
         <div class="sub_title2">
-            &#160Impostos (presumido):
+            &#160Impostos (Presumido):
             @if(isset($imposto))
             R${{$imposto->impostos_presumido}}
             @endif
