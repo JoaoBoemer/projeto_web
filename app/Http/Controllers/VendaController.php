@@ -17,24 +17,30 @@ class VendaController extends Controller
         $cliente = $request->cliente;
         $data = $request->data;
         $forma_pagamento = $request->forma_pagamento;
-        dump($estoque_id, $quantidade, $valor, $cliente, $data, $forma_pagamento);
 
         $estoque = estoque::find($estoque_id);
 
-        dump($estoque);
-
-        return "AntesDoInsert";
+        if($quantidade > $estoque->estoque_quantidade){
+            session()->flash('saldo_insuficiente', 'Nao ha saldo suficiente no estoque para efetuar a venda.');
+            return redirect()->route('venda');
+        }else{
+            $estoque->estoque_quantidade -= $quantidade;
+            $estoque->save();
+        }
         Venda::insert([
-            // 'produto_id' => $produto_id,
+            'produto_id' => $estoque->produto_id,
             'estoque_id' => $estoque_id,
-            'compra_quantidade' => $quantidade,
-            'compra_valor' => $valor,
-            'compra_cliente' => $cliente,
-            'compra_data' => $data,
-            'compra_forma_pagamento' => $forma_pagamento
+            'venda_quantidade' => $quantidade,
+            'venda_valor' => $valor,
+            'venda_cliente' => $cliente,
+            'venda_data' => $data,
+            'venda_forma_pagamento' => $forma_pagamento
         ]);
 
-        session()->flash('Sucesso', 'Compra cadastrada com sucesso.');
+        session()->flash('success', 'Venda cadastrada com sucesso.');
         return redirect()->route('venda');
+    }
+    public function excluir($id){
+        return 0;
     }
 }

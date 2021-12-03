@@ -23,7 +23,8 @@ class CompraController extends Controller
         }
 
         $estoque = Estoque::select('*')->where([
-            'produto_id' => $produto_id
+            'produto_id' => $produto_id,
+            'estoque_valor' => $valor
             ])->first();
 
         if(isset($estoque)){

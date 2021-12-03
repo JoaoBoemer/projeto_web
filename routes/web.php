@@ -40,6 +40,7 @@ Route::delete('/produto/excluir/{produto_id}', [App\Http\Controllers\ProdutoCont
 Route::post('/compra/cadastrar', [\App\Http\Controllers\CompraController::class, 'comprar'])->name('compra_cadastrar');
 Route::get('/compra/{compra_id}', [App\Http\Controllers\CompraController:: class, 'excluir'])->name('compra_excuir');
 Route::post('/venda/submit', [App\Http\Controllers\VendaController:: class, 'vender'])->name('venda_cadastrar');
+Route::get('/venda/{venda_id}', [App\Http\Controllers\VendaController::class, 'excluir'])->name('venda_excluir');
 
 Route::get('/compra', function(){
     $produto_array = App\Models\Produto::all();
@@ -49,7 +50,8 @@ Route::get('/compra', function(){
 
 Route::get('/venda', function(){
     $estoque_array = App\Models\Estoque::all();
-    return view('dashboard/venda', compact('estoque_array'));
+    $vendas = App\Models\Venda::all();
+    return view('dashboard/venda', compact('estoque_array'), compact('vendas'));
 })->name('venda');
 
 Route::get('/estoque', function(){
