@@ -22,26 +22,30 @@
     </form>
     <div class="input-group mb-3">
         <div class="sub_title2">
-            &#160LUCRO REAL (TOTAL): R$0,00
+            &#160Lucro liquido (Lucro real):
+            @if(isset($imposto))
+            R${{$imposto->lucro_liquido}}
+            @endif
         </div>
         <div class="sub_title2">
-            &#160Lucro presumido: R$0,00
-        </div>
-    </div>
-    <div class="input-group mb-3">
-        <div class="sub_title2">
-            &#160Debitos (pago): R$0,00
-        </div>
-        <div class="sub_title2">
-            &#160Debitos (pago): R$0,00
+            &#160Faturamento (Lucro presumido):
+            @if(isset($imposto))
+            R${{$imposto->faturamento_liquido}}
+            @endif
         </div>
     </div>
     <div class="input-group mb-3">
         <div class="sub_title2">
-            &#160Credito (recebido): R$0,00
+            &#160Impostos (real):
+            @if(isset($imposto))
+            R${{$imposto->impostos_real}}
+            @endif
         </div>
         <div class="sub_title2">
-            &#160Credito (recebido): R$0,00
+            &#160Impostos (presumido):
+            @if(isset($imposto))
+            R${{$imposto->impostos_presumido}}
+            @endif
         </div>
     </div>
 </body>

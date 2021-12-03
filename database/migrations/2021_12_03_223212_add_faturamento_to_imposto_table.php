@@ -28,11 +28,11 @@ class AddFaturamentoToImpostoTable extends Migration
      */
     public function down()
     {
-        Schema::table('imposto.', function (Blueprint $table) {
-            $table->dropColumn('impostos_real',8,2);
-            $table->dropColumn('impostos_presumido',8,2);
-            $table->dropColumn('faturamento_liquido',8,2);
-            $table->dropColumn('lucro_liquido',8,2);
+        Schema::table('imposto', function (Blueprint $table) {
+            $table->dropColumn('impostos_real');
+            $table->dropColumn('impostos_presumido');
+            $table->dropColumn('faturamento_liquido');
+            $table->dropColumn('lucro_liquido');
         });
     }
 }

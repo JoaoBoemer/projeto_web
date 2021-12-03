@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\compra;
 use App\Models\Venda;
+use App\Models\Imposto;
 
 class ImpostoController extends Controller
 {
@@ -52,12 +53,26 @@ class ImpostoController extends Controller
         $impostos_real = $CSLL_REAL + $PIS_REAL + $COFINS_REAL + $IRPJ_REAL;
         $lucro_liquido = $lucro_bruto - $impostos_real;
 
+        $imposto = imposto::all();
+
+        if(isset($imposto->impostos_real)){
+            $imposto->delete();
+        }
+
+        imposto::insert([
+            'imposto_data' => $data_inicio,
+            'impostos_real' => $impostos_real,
+            'impostos_presumido' => $impostos_presumido,
+            'faturamento_liquido' => $faturamento_liquido,
+            'lucro_liquido' => $lucro_liquido
+        ]);
+
         // Enviar:
         // $impostos_real;
         // $impostos_presumido;
         // $faturamento_liquido;
         // $lucro_liquido;
         // return 0;
-        return 0;
+        return redirect()->route('imposto');
     }
 }

@@ -62,7 +62,8 @@ Route::get('/estoque', function(){
 })->name('estoque');
 
 Route::get('/imposto', function(){
-    return view('dashboard/imposto');
+    $imposto = App\Models\Imposto::select('*')->first();
+    return view('dashboard/imposto', compact('imposto'));
 })->name('imposto');
 
 
