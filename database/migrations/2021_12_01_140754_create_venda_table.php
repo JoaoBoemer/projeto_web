@@ -16,8 +16,8 @@ class CreateVendaTable extends Migration
         Schema::create('venda', function (Blueprint $table) {
             $table->id();
             $table->date("venda_data");
-            $table->float("venda_quantidade", 8, 2);
-            $table->float("venda_valor", 8, 2);
+            $table->double("venda_quantidade");
+            $table->double("venda_valor");
             $table->string("venda_cliente");
             $table->string("venda_forma_pagamento");
             $table->timestamps();

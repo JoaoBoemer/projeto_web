@@ -26,16 +26,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 </head>
 
-<main style="margin:auto">
+<body style="margin:auto">
 
-<header class="menu_principal">
+    <header class="menu_principal">
         <br>
         <div style="width: 70%; margin: auto;">
             <div class="logoff" style="float: left;">
                 <a href="/">logoff</a>
             </div>
             <div style="float: right;">
-                <img style="width:100px;" src="https://i.imgur.com/53qhSMa.png" title="source: imgur.com" />
+                <img style="" src="https://i.imgur.com/Bb6VAKv.png" title="source: imgur.com" />
             </div>
         </div>
         <main>
@@ -70,7 +70,4 @@
         </main>
     </header>
     @yield('content')
-
-    <!-- FOOTER -->
-    <br>
-</main>
+</body>

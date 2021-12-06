@@ -4,7 +4,9 @@
 
 @section('content')
 
-<?php use App\Models\Produto; ?>
+<?php
+
+use App\Models\Produto; ?>
 
 @if(session()->has('saldo_insuficiente'))
 <div class='alert alert-danger'>
@@ -44,7 +46,7 @@
                         @foreach($estoque_array AS $estoque)
                         @if($estoque->estoque_quantidade > 0)
                         <option value="{{ $estoque->id }}" name="produto">
-                            Produto: 
+                            Produto:
                             <?php $produto = Produto::select('produto_nome')->where(['id' => $estoque->produto_id])->first();
                             print($produto->produto_nome); ?> </td>
                             | Produto ID: {{ $estoque->produto_id}} | Quantidade: {{ $estoque->estoque_quantidade }} | Valor: R${{ $estoque->estoque_valor }}</option>
@@ -71,6 +73,10 @@
             </div>
         </form>
     </div>
+    <h2 style="text-align:center;">
+        <BR>
+        Vendas cadastradas
+    </h2>
     <table class="table" style="width:75%; text-align:center; margin: auto;">
         <thead>
             <tr>
@@ -89,14 +95,14 @@
             <tr>
                 <td> {{$venda->id}} </td>
                 <td> <?php $produto = produto::select('produto_nome')->where(['id' => $venda->produto_id])->first();
-                print($produto->produto_nome); ?> </td>
+                        print($produto->produto_nome); ?> </td>
                 <td> {{$venda->venda_cliente}} </td>
                 <td> {{$venda->venda_quantidade}} </td>
                 <td> R${{$venda->venda_valor}} </td>
                 <td> {{$venda->venda_data}} </td>
                 <td> {{$venda->venda_forma_pagamento}} </td>
                 <td> <a href="venda/{{$venda->id}}" class="btn btn-primary">Excluir</a> </td>
-                </tr>
+            </tr>
             @endforeach
         </tbody>
     </table>

@@ -66,7 +66,7 @@ use Illuminate\Support\Facades\DB;
             </div>
         </form>
     </div>
-    <h2>Itens Cadastrados</h2>
+    <h2 style="text-align:center;">Itens Cadastrados</h2>
     <table class="table" style="width:75%; text-align:center; margin: auto;">
         <thead>
             <tr>

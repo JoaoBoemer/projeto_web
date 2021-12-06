@@ -16,8 +16,8 @@ class CreateCompraTable extends Migration
         Schema::create('compra', function (Blueprint $table) {
             $table->id();
             $table->date("compra_data");
-            $table->float("compra_quantidade", 8, 2);
-            $table->float("compra_valor", 8, 2);
+            $table->double("compra_quantidade");
+            $table->double("compra_valor");
             $table->string("compra_cliente");
             $table->string("compra_forma_pagamento");
             $table->timestamps();
