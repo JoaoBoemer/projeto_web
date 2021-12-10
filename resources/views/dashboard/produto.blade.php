@@ -27,6 +27,16 @@ use Illuminate\Support\Facades\DB;
     <p>{{ session()->get('produto_atualizado')}}
 </div>
 @endif
+@if(session()->has('produto_em_uso'))
+<div class='alert alert-danger'>
+    <p>{{ session()->get('produto_em_uso')}}
+</div>
+@endif
+@if(session()->has('produto_excluido'))
+<div class='alert alert-success'>
+    <p>{{ session()->get('produto_excluido')}}
+</div>
+@endif
 
 <body>
     <H3 style="text-align: center;">ITEM</H3>

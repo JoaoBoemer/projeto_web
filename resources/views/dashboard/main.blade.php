@@ -6,7 +6,7 @@
 
 <body>
     <div class="sub_title">
-        <h3>Sobre o sistema<br></h3>
+        <h3>Sobre<br></h3>
     </div>
     <div class="body_text">
         O lucro real e o lucro presumido são as duas principais formas de se tributar empresas no Brasil, assim, é muito importante conhecer ambos para conhecer a melhor maneira de ter seus tributos deduzidos. Há algumas recomendações sobre qual escolher, porém, dependendo de como sua empresa gera lucro, elas podem variar e você pode estar perdendo.<br><br>

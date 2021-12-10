@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Estoque;
 use Illuminate\Http\Request;
 use App\Models\produto;
+use App\Models\compra;
 use Illuminate\Support\Facades\DB;
 
 class ProdutoController extends Controller
@@ -75,6 +75,11 @@ class ProdutoController extends Controller
             // session()->flash('produto_em_estoque', 'Produto não pode ser excluido pois está no esotque.');
             // return redirect()->route('produto');
         // }
+        $compra = Compra::Select('*')->where(['produto_id' => $id])->first();
+        if(isset($compra)){
+            session()->flash('produto_em_uso', 'O produto está sendo utilizado em alguma compra.');
+            return redirect()->route('produto');
+        }
         $produto->delete();
         session()->flash('produto_excluido', 'Produto deletado com sucesso.');
         return redirect()->route('produto');
